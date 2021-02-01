@@ -1,10 +1,15 @@
 import "./App.css";
-import DemoComponent from "./Engine/Components/DemoComponent";
+import Engine from "./Engine";
+
+const template = {
+  key: "root",
+  widget: "Text"
+};
 
 function App() {
   return (
     <div className="App">
-      <DemoComponent />
+      <Engine template={template} />
     </div>
   );
 }

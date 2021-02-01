@@ -3,7 +3,8 @@ import { is } from "immutable";
 
 export default class BaseComponent extends React.Component {
   state = {
-    firstRender: false // 首次渲染
+    firstRender: false, // 首次渲染
+    value: void 0
   };
   // React 性能优化
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -29,11 +30,22 @@ export default class BaseComponent extends React.Component {
     }
     return false;
   }
-  componentDidUpdate(prevProps, prevState) {}
+  componentDidUpdate(prevProps, prevState) {
+    this.didUpdate(prevProps, prevState, 'prevProps, prevState');
+  }
   componentDidMount() {
+    this.didMount(this.props, this.state, 'props, state');
     this.setState({
-      firstRender: true
     });
+  }
+  didMount(props, state) {
+    console.info("didMount", props, state);
+  }
+  didUpdate(prevProps, prevState) {
+    console.info("didUpdate", prevProps, prevState);
+  }
+  onChange() {
+    console.info("onChange");
   }
   render() {
     return <>{this.props.children}</>;
